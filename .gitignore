@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Runtime data and logs
+infosys_milestone1_users.json
+streamlit.log
+*.db
+*.sqlite
+*.sqlite3
+
+# Notebook/runtime artifacts
+.ipynb_checkpoints/
+.DS_Store
