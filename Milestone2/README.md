@@ -11,15 +11,39 @@ The submission is provided as one self-contained Google Colab notebook. The note
 
 ---
 
+## Team 03 — contribution summary
+
+The following team-member responsibilities are listed in the team's Milestone 2 reference documentation:
+
+| Team member | Contribution area |
+|---|---|
+| **Mehak** | Login page, Admin dashboard and Freight Broker role |
+| **Bhavana** | Operations Manager role |
+| **Bhargav** | Customer role and customer-specific quote/Copilot access |
+| **Shahabuddin** | Auditor role and read-only access |
+
 ## Repository layout
 
 ```text
 Milestone2/
-├── Milestone2.ipynb    # Complete, self-contained Colab project
-└── README.md           # Project overview, setup and role documentation
+├── Milestone2.ipynb       # Complete, self-contained Colab project (canonical)
+├── README.md              # Project overview, setup and role documentation
+├── requirements.txt       # Python packages installed by the notebook
+├── app/                   # Source files mirrored from notebook writefile cells
+│   ├── server.py
+│   ├── auth.py
+│   ├── rbac.py
+│   ├── copilot_plus.py
+│   ├── ...
+│   └── static/             # Front-end files and bundled vendor assets
+└── Screenshots/           # Milestone 2 evidence images and screenshot index
 ```
 
-The notebook creates the following application structure inside the Colab runtime; these files are embedded in notebook cells and are not separate repository uploads:
+**Source-of-truth note:** The notebook remains the canonical submission. The `app/` files are exact extracted copies of the notebook's `%%writefile` cells and embedded static assets, included so reviewers can browse individual files on GitHub. Running the notebook recreates `/content/app/` in Colab. The `Screenshots/` folder contains the 10 Milestone 2 JPEG evidence images copied into this package. The screenshots are stored locally, so they remain available when this folder is uploaded to your repository; no external image hosting is required.
+
+There is no separate `app.py` entry point in this project. The FastAPI application is defined in `app/server.py` and launched by the notebook with Uvicorn as `server:app`.
+
+The notebook creates the following application structure inside the Colab runtime:
 
 ```text
 /content/app/
@@ -220,11 +244,11 @@ The notebook installs its Python dependencies in its first setup cell and extrac
 
 | Secret | Purpose | Requirement |
 |---|---|---|
-| `JWT_SECRET` | Signs authentication tokens. | Required for the intended configured setup. |
+| `JWT_SECRET` | Signs authentication tokens. | Recommended. If omitted, the app generates a random secret in runtime data; a fresh Colab runtime can invalidate existing sessions. |
 | `NGROK_AUTHTOKEN` | Provides the public ngrok link if the Colab proxy is unavailable. | Fallback; add when using ngrok. |
 | `EMAIL_ADDRESS` | Gmail address used to send password-reset OTP messages. | Needed for e-mail OTP recovery. |
 | `EMAIL_PASSWORD` | Gmail App Password for the sender account. | Needed for e-mail OTP recovery. |
-| `ADMIN_PASSWORD` | Password for the initial Admin account. | Optional; a generated password is used when not supplied. |
+| `ADMIN_PASSWORD` | Password for the initial Admin account. | Set a strong value. With the notebook's default demo mode, omitting it falls back to the demonstration password `Admin@123`. |
 | `ADMIN_EMAIL` | E-mail address for the initial Admin account. | Optional; defaults to `admin@freightquote.ai`. |
 | `DEMO_PASSWORD` | Password shared by the four seeded non-Admin demo accounts. | Optional; generated passwords are used when not supplied. |
 
@@ -257,6 +281,8 @@ The passwords are supplied through Colab Secrets or generated at runtime. They a
 - Colab runtime storage may be temporary. The application data is kept in the runtime data directory unless a persistent data directory is configured.
 - The ngrok URL is accessible to anyone who has the link while the tunnel is active. Use demo accounts for evaluation and stop the runtime/tunnel when finished.
 - Before using the application outside an educational demonstration, configure strong credentials and review the demonstration defaults and deployment security settings.
+- **Demo-password warning:** the embedded `app/config.py` source contains a demonstration-mode fallback password, `Admin@123`, for the initial Admin when `ADMIN_PASSWORD` is not supplied. This code has been preserved unchanged in the notebook. Before running it, set a strong `ADMIN_PASSWORD` in Colab Secrets so the fallback is not used. Do not rely on demonstration defaults for a public or real deployment.
+- The notebook's authentication module can generate demo-account credentials at first start. Keep the credential output private and clear outputs before committing any executed copy.
 
 ---
 
@@ -281,6 +307,71 @@ This checklist is provided for the final Colab verification run; it is not a cla
 
 ---
 
+## Milestone 2 screenshot evidence
+
+The role matrix required by the instructions is documented above. The 10 available team screenshots are included as local JPEG files in `Screenshots/`. They were copied only from Mehak's `Milestone2/screenshots/` folder. No screenshots or other files from her `Milestone1/` folder are included.
+
+| Screenshot | What it shows |
+|---|---|
+| Login Page | Shared sign-in page |
+| Admin Dashboard | Admin users table and account controls |
+| Admin Profile | Admin profile and account settings |
+| Admin AI Copilot | SQL Copilot answer/table view |
+| Operations Manager AI Copilot | Operations Manager Copilot view |
+| Operations Manager Profile | Operations Manager profile |
+| Freight Broker | Freight Broker margin view |
+| Auditor Spot Quotes | Auditor's read-only Spot Quotes view |
+| Auditor Profile | Auditor profile |
+| Customer | Customer profile and customer navigation |
+
+### Screenshot gallery (Milestone 2 only)
+
+The following images are embedded from the team's Milestone 2 screenshot folder.
+
+**Login page**
+
+![Milestone 2 login page](Screenshots/Login%20Page.jpeg)
+
+**Admin dashboard**
+
+![Milestone 2 Admin dashboard](Screenshots/Admin%20Dashboard.jpeg)
+
+**Admin profile**
+
+![Milestone 2 Admin profile](Screenshots/Admin%20Profile.jpeg)
+
+**Admin AI Copilot**
+
+![Milestone 2 Admin AI Copilot](Screenshots/Admin%28AI%20Copilot%29.jpeg)
+
+**Operations Manager AI Copilot**
+
+![Milestone 2 Operations Manager AI Copilot](Screenshots/Operations%20Manager%28AI%20Copilot%29.jpeg)
+
+**Operations Manager profile**
+
+![Milestone 2 Operations Manager profile](Screenshots/Operations%20Manager%28Profile%29.jpeg)
+
+**Freight Broker**
+
+![Milestone 2 Freight Broker view](Screenshots/Freight%20Broker.jpeg)
+
+**Auditor Spot Quotes**
+
+![Milestone 2 Auditor Spot Quotes](Screenshots/Auditor%28Spots%20Quotes%29.jpeg)
+
+**Auditor profile**
+
+![Milestone 2 Auditor profile](Screenshots/Auditor%28Profile%29.jpeg)
+
+**Customer profile**
+
+![Milestone 2 Customer profile](Screenshots/Customer.jpeg)
+
+**Remaining instructor-requested evidence not present in the available set:** a separate signup-form capture, an explicit restricted-action HTTP `403` capture, a Copilot greeting capture, a generated-quote confirmation/view, and the Weather page after a storm scenario. The current screenshots must not be presented as proof of those missing cases. Capture those from the working application before calling the evidence set complete.
+
+---
+
 ## Submission contents
 
-This Milestone 2 folder contains the complete self-contained notebook and this README. Screenshot evidence is managed separately and is not included in this archive.
+This Milestone 2 folder contains the cleared-output Colab notebook, README, package list, an exact source-file mirror extracted from the notebook, and a screenshot-evidence checklist. The notebook code itself has not been modified.

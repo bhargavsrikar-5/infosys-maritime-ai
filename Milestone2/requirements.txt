@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pandas
+numpy
+scikit-learn
+scipy
+matplotlib
+langgraph
+vaderSentiment
+pdfplumber
+requests
+pyngrok
+bcrypt
+PyJWT
