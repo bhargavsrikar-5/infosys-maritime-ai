@@ -1,6 +1,6 @@
 # Milestone 2 screenshots only
 
-These 10 JPEGs are copied from the `Milestone2/screenshots/` directory of the team's Mehak repository. **Only Milestone 2 screenshots are included. No images from `Milestone1/` are included.**
+These 10 JPEGs are copied from the `Milestone2/screenshots/` directory of the team's Mehak repository. **Only Milestone 2 screenshots are included. No images from `Milestone1/` are included.** They have been sanitized before inclusion: account emails and usernames, customer/account identifiers, account activity timestamps, the quote reference and revenue amount are hidden; a personal profile photograph was replaced with a generic silhouette. The sign-in screenshot had no entered credentials.
 
 ## Screenshot gallery
 

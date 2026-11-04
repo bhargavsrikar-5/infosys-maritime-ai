@@ -39,7 +39,7 @@ Milestone2/
 └── Screenshots/           # Milestone 2 evidence images and screenshot index
 ```
 
-**Source-of-truth note:** The notebook remains the canonical submission. The `app/` files are exact extracted copies of the notebook's `%%writefile` cells and embedded static assets, included so reviewers can browse individual files on GitHub. Running the notebook recreates `/content/app/` in Colab. The `Screenshots/` folder contains the 10 Milestone 2 JPEG evidence images copied into this package. The screenshots are stored locally, so they remain available when this folder is uploaded to your repository; no external image hosting is required.
+**Source-of-truth note:** The notebook remains the canonical submission. The `app/` files are exact extracted copies of the notebook's `%%writefile` cells and embedded static assets, included so reviewers can browse individual files on GitHub. Running the notebook recreates `/content/app/` in Colab. The `Screenshots/` folder contains the 10 Milestone 2 JPEG evidence images copied into this package. The screenshots are stored locally, so they remain available when this folder is uploaded to your repository; no external image hosting is required. The published copies have been privacy-redacted: account email addresses and login usernames, customer/account identifiers, account activity timestamps, a quote reference, a revenue figure, and a personal profile photo are obscured. The role labels and relevant application evidence remain visible. The Login Page screenshot had empty credential fields.
 
 There is no separate `app.py` entry point in this project. The FastAPI application is defined in `app/server.py` and launched by the notebook with Uvicorn as `server:app`.
 
